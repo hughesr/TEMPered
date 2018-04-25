@@ -29,7 +29,7 @@ bool tempered_type_hid_get_temperature_fm75(
 	// This temperature formula is taken from the FM75 datasheet.
 	// This is the same as dividing by 256; basically moving the
 	// decimal point into place.
-	*tempC = temp * 125.0 / 32000.0;
+	*tempC = temp / 100.0; // temp * 125.0 / 32000.0;
 	
 	return true;
 }

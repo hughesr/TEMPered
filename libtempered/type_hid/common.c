@@ -376,13 +376,28 @@ bool tempered_type_hid_query(
 		result->length = 0;
 		return false;
 	}
-	result->length = size;
-	if ( size == 0 )
+	else if ( size == 0 )
 	{
 		tempered_set_error(
 			device, strdup( "No data was read from the sensor (timeout)." )
 		);
 		return false;
+	}
+	else
+	{
+		result->length = 0;
+		while (size > 0)
+		{
+			result->length += size;
+			size = hid_read_timeout(
+					hid_dev, &result->data[result->length], sizeof( result->data - result->length), 200
+			);
+		}
+
+		if (size > 0)
+		{
+			result->length += size;
+		}
 	}
 	return true;
 }
