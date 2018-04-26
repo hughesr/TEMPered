@@ -4,6 +4,9 @@ set(CMAKE_USER_MAKE_RULES_OVERRIDE
 )
 project(TEMPered C)
 
+INCLUDE_DIRECTORIES(/usr/local/include)
+LINK_DIRECTORIES(/usr/local/lib)
+
 include(CMakeDependentOption)
 include(GNUInstallDirs OPTIONAL)
 
